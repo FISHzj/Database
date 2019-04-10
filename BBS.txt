@@ -16,6 +16,8 @@ Forumuser:
 	getNum(self)									#取得用户学号，工号
 	getNickName(self)								#取得用户昵称
 	getPhoto(self)									#取得用户头像
+	sex(self)									#取得用户性别
+	set_photo(self,newphoto)					           #从指定地址读取照片
 	
 Forumtopic:	
 	Forumtopic(self,str title,str topic,str num,str topicback)			#传入发帖标题，帖子内容地址，作者工号，返回帖子保存地址
