@@ -24,28 +24,28 @@ ADT student:							    #定义公共人员数据
 
 
 ADT Course:								#定义课程数据
-	Course(self,str name,str description,str type)				#构造课程对象
+	Course(self,str name,str description,str course_type,str courseware,str coursewareback，str schoolyear,list student,str teacher)#构造课程对象
 	name(self)							#取得课程名称
-	set_name(self,course_name)					#设置课程名称
 	description(self)						#取得课程描述
 	set_description(self,description)				#设置课程描述
-	type(self)							#取得课程类型（大小班）
+	course_type(self)						#取得课程类型（大小班）
 	set_type(self,type)						#设置课程类型
-	details(self)							#输出课程数据
-
-ADT Spcourse(Course):							#定义具体课程数据
-	Spcourse(self,str name,str description,str schoolyear,list student)
-	schoolyear(self)						#取得课程学年
+	get_courseware(self)						#取得课件
+	add_courseware(self,str new_courseware)				#添加课件路径							
+	course_schoolyear(self)						#取得课程学年
 	student(self)							#取得课程学生列表
-	add_student(self,str student_name)   	   			#增加学生
-	rm_student(self,str student_name)				#删除学生
-ADT teacher(Person):							#定义老师数据
+	add_student(self,list student_name)   	   			#增加学生
+	delete_student(self,list student_name)				#删除学生
+	course_teacher(self)						#取得授课教师
+
+
+ADT teacher(Person):							
      	Teacher(self,str name,str sex,tuple birthday,str ident,str role,str state,str email,photo,list course)
 	course(self)							#取得老师课程列表
 	add_course(self,str course_name)				#增加课程
 	rm_course(self,str course_name)  				#删除课程
 
-ADT connectmdb:								
+ADT connectmdb:								u
 	Connectmdb(self,str hostname,str port,str database)		#连接mongodb数据库
 	disconnectmdb(self)						#断开连接mongodb数据库
 	

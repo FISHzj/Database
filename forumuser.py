@@ -12,15 +12,14 @@ class Forumuser:
         with open(photo,'rb') as f:
             content=bson.binary.Binary(f.read())
             forumuser._db.forumuser.insert_one({'num':num,'nickname':nickname,'photoname':f.name,'photodata':content})
-            self._photo = os.path.join(photoback, os.path.basename(f.name))
         self._photoback=photoback
         self._idd = ObjectId(forumuser._db.forumuser.find_one({'num': num})['_id'])
         self._condition = {'_id':self._idd}
-        self._num=forumuser._db.forumuser.find_one(self._condition)['num']
-        self._nickname=forumuser._db.forumuser.find_one(self._condition)['nickname']
+        self._num = forumuser._db.forumuser.find_one(self._condition)['num']
     def getNum(self):
         return self._num
     def getNickName(self):
+        self._nickname = forumuser._db.forumuser.find_one(self._condition)['nickname']
         return self._nickname
     def setNickName(self,newnickname):
         if not isinstance(newnickname,str):
@@ -30,17 +29,18 @@ class Forumuser:
         else:
             return False
     def getPhoto(self):
-        data = forumuser._db.forumuser.find_one(self._condition)
+        photoname=forumuser._db.forumuser.find_one(self._condition)['photoname']#获取照片名称
+        self._photo = os.path.join(self._photoback, os.path.basename(photoname))#路径+照片名
+        data = forumuser._db.forumuser.find_one(self._condition)#取得数据库照片内容
         with open(self._photo, 'wb') as g:
             g.write(data['photodata'])
-        return self._photo
     def set_photo(self, newphoto):
         if not isinstance(newphoto, str):
             raise TypeError('newphoto')
         with open(newphoto, 'rb') as p:
             content = bson.binary.Binary(p.read())
             forumuser._db.forumuser.update_one(self._condition, {'$set': {'photodata': content}})
-            self._photo = os.path.join(self._photoback, os.path.basename(p.name))
+            forumuser._db.forumuser.update_one(self._condition, {'$set': {'photoname': p.name}})
     def sex(self):
         return forumuser._db.student.find_one({'num':self._num})['sex']
     #@classmethod

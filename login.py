@@ -11,8 +11,6 @@ class Login:
             self._id=ObjectId(login._db.account.find_one({'password':password,'$or':[{'wechatnum':wechatnum},{'num':num},{'username':username}]})['_id'])
             self._condition={'_id':self._id}
             print('Log in successfully!')
-            self._username=login._db.account.find_one(self._condition)['username']
-            self._password=login._db.account.find_one(self._condition)['password']
             self._wechatnum=login._db.account.find_one(self._condition)['wechatnum']
             self._num=login._db.account.find_one(self._condition)['num']
         else:
@@ -22,8 +20,10 @@ class Login:
     def wechatnum(self):
         return self._wechatnum
     def password(self):
+        self._password = login._db.account.find_one(self._condition)['password']
         return self._password
     def username(self):
+        self._username = login._db.account.find_one(self._condition)['username']
         return self._username
     def set_username(self,username):
         if not isinstance(username,str):

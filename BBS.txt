@@ -26,11 +26,13 @@ Forumtopic:
 	getAuthername(self)								#取得发帖作者昵称
 	getAuthernum(self)								#取得发帖作者工号
 	getTime(self)									#取得帖子存入数据库的时间
+	get_sex(self)									#取得发帖者性别
  Forumreply:
 	Forumreply(self,str reply,str num,str replyback)				#传入回复者内容地址，作者工号，返回保存内容地址
 	getContent(self)
 	getAuthernum(self)
 	getAuthername(self)
 	getTime(self)
+	get_sex(self)
 	
 
