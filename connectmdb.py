@@ -1,5 +1,10 @@
 from pymongo import *
-class Connectmdb:
+class Connectmdb(object):
+    instance=None
+    def __new__(cls, *args, **kwargs):
+        if cls.instance is None:
+            cls.instance=super().__new__(cls)
+        return cls.instance
     def __init__(self,hostname='localhost',port=27014,database='myclass'):
         if not isinstance(hostname,str) and isinstance(port,int):
             raise TypeError('invalid hostname','invalid port')
