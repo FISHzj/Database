@@ -64,7 +64,7 @@ class Student:  #缺少photo
         #count=student._db.course.count_documents({'student':{'$student'!=[]}})
         self._course=[]
         for result in student._db.course.find():
-            if self._name in result['_student']:
+            if self._name in result['student']:
                 self._course.append(result['name'])
 
 
